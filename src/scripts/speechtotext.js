@@ -9,7 +9,7 @@ let isrecording = false
 
 
 // Configuration about the recognition
-recognition.continuous = false;
+recognition.continuous = true;
 recognition.lang = userlanguage;
 recognition.interimResults = false;
 recognition.maxAlternatives = 1;
@@ -45,4 +45,12 @@ buttonrecordingelement.addEventListener('click', function(e) {
 recognition.addEventListener('result', function(e) {
     const result = e.results[0][0].transcript; 
     texarea.textContent = result; 
+    buttonrecordingelement.innerHTML = "Start Recording";
+
+    buttonrecordingelement.classList.remove("hover:bg-red-500")
+    buttonrecordingelement.classList.add("hover:bg-blue-500")
+
+    iconmicrophone.classList.add("fill-gray-400")
+    iconmicrophone.classList.remove("fill-red-500")
+
 });
