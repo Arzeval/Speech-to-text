@@ -1,6 +1,10 @@
 
 
-const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)()
+const SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
+const SpeechGrammarList = SpeechGrammarList || window.webkitSpeechGrammarList
+const SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
+const recognition = new SpeechRecognition();
+
 const userlanguage = navigator.language
 const buttonrecordingelement = document.getElementById("buttonrecording")
 const texarea = document.getElementById("messagefinal")
