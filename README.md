@@ -9,3 +9,7 @@ It is a small project made for astro learning in which you have to compile what 
 * JavaScript
 * Web Speech API
 * Google Translate
+
+## Demo
+
+[Here](https://speech-to-text-mauve.vercel.app/)
