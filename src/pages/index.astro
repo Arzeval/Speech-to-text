@@ -1,14 +1,17 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Title from '../components/Title.astro';
-
+import Policy from '../components/Policy.astro';
+import Footer from '../components/Footer.astro';
 ---
 
 <Layout title="Welcome to Astro.">
 	<main>
 		<Title />
-	
+		<Policy />
 	</main>
+	<hr class="my-6 sm:mx-auto border-white/10 lg:my-8" />
+	<Footer />
 </Layout>
 
 <style>
@@ -21,6 +24,7 @@ import Title from '../components/Title.astro';
 		font-size: 20px;
 		line-height: 1.6;
 	}
+	
 	.astro-a {
 		position: absolute;
 		top: -32px;

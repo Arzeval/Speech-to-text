@@ -44,7 +44,8 @@ buttonrecordingelement.addEventListener('click', function(e) {
 
 recognition.addEventListener('result', function(e) {
     const result = e.results[0][0].transcript; 
-    texarea.textContent = result; 
+     Translate(result)
+    
     buttonrecordingelement.innerHTML = "Start Recording";
 
     buttonrecordingelement.classList.remove("hover:bg-red-500")
@@ -52,5 +53,33 @@ recognition.addEventListener('result', function(e) {
 
     iconmicrophone.classList.add("fill-gray-400")
     iconmicrophone.classList.remove("fill-red-500")
-
+    isrecording = false
 });
+
+async function Translate(text) {
+    try {
+        let sourceLang = navigator.language;  // Define el idioma de origen
+        let selectedLanguage = document.getElementById('TargetLanguage').value;
+       
+        // Crea la URL de la API
+        const url = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=" + sourceLang + "&tl=" + selectedLanguage + "&dt=t&q=" + encodeURI(text);
+
+        // Realiza la llamada a la API
+        let response = await fetch(url);
+        if (!response.ok) {
+            throw new Error('La respuesta de la red no fue correcta');
+        }
+
+        // Obtiene la respuesta de la API
+        let data = await response.json();
+        let translatedText = data[0][0][0];
+
+      
+
+        // Inserta el texto traducido en el elemento
+        const elementoMensaje = document.querySelector('.mensaje');
+        texarea.textContent = translatedText;
+    } catch (error) {
+        console.error('Error al traducir el texto:', error);
+    }
+}
