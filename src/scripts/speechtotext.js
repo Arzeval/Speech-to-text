@@ -18,7 +18,7 @@ recognition.maxAlternatives = 1;
 buttonrecordingelement.addEventListener('click', function(e) {
     
     e.preventDefault(); 
-    if (isrecording == false) {
+    if (isrecording == false) { // If it is not recording then I proceed to compile and modify css styles.
         recognition.start(); 
         buttonrecordingelement.innerHTML = "Stop Recording";
 
@@ -28,7 +28,7 @@ buttonrecordingelement.addEventListener('click', function(e) {
         buttonrecordingelement.classList.add("hover:bg-red-500")
         buttonrecordingelement.classList.remove("hover:bg-blue-500")
         isrecording = true
-    } else if (isrecording == true) {
+    } else if (isrecording == true) { // Stop recording and remodify values
         recognition.stop();
         isrecording = false
         buttonrecordingelement.innerHTML = "Start Recording";
@@ -42,7 +42,7 @@ buttonrecordingelement.addEventListener('click', function(e) {
    
 });
 
-recognition.addEventListener('result', function(e) {
+recognition.addEventListener('result', function(e) { // Result of the audio compilation in which I send it to write and modify the values since the API itself can stop if it stops receiving audio (It can happen).
     const result = e.results[0][0].transcript; 
      Translate(result)
     
@@ -56,30 +56,30 @@ recognition.addEventListener('result', function(e) {
     isrecording = false
 });
 
-async function Translate(text) {
+async function Translate(text) { //Get the language of the browser to start as a base (I assume that it speaks the same language as the one in which Chrome is set) and it returns a response by entering
     try {
-        let sourceLang = navigator.language;  // Define el idioma de origen
+        let sourceLang = navigator.language;  
         let selectedLanguage = document.getElementById('TargetLanguage').value;
        
-        // Crea la URL de la API
+        
         const url = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=" + sourceLang + "&tl=" + selectedLanguage + "&dt=t&q=" + encodeURI(text);
 
-        // Realiza la llamada a la API
+      
         let response = await fetch(url);
         if (!response.ok) {
-            throw new Error('La respuesta de la red no fue correcta');
+            throw alert("An error occurred, try again later.");
         }
 
-        // Obtiene la respuesta de la API
+        
         let data = await response.json();
         let translatedText = data[0][0][0];
 
       
 
-        // Inserta el texto traducido en el elemento
-        const elementoMensaje = document.querySelector('.mensaje');
+     
+        
         texarea.textContent = translatedText;
     } catch (error) {
-        console.error('Error al traducir el texto:', error);
+        alert("An error occurred, try again later.")
     }
 }
