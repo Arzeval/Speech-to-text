@@ -44,6 +44,7 @@ buttonrecordingelement.addEventListener('click', function(e) {
 
 recognition.addEventListener('result', function(e) { // Result of the audio compilation in which I send it to write and modify the values since the API itself can stop if it stops receiving audio (It can happen).
     const result = e.results[0][0].transcript; 
+    recognition.stop();
      Translate(result)
     
     buttonrecordingelement.innerHTML = "Start Recording";
