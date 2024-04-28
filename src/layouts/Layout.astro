@@ -6,7 +6,7 @@ interface Props {
 const { title } = Astro.props;
 
 import "@fontsource-variable/onest"
-
+import  SpeedInsights  from "@vercel/speed-insights/astro"
 ---
 
 <!doctype html>
@@ -22,7 +22,7 @@ import "@fontsource-variable/onest"
 	<body>
 		
 		<slot />
-	
+		<SpeedInsights />
 	</body>
 </html>
 <style is:global>
