@@ -16,21 +16,31 @@ recognition.maxAlternatives = 1;
 
 
 buttonrecordingelement.addEventListener('click', function(e) {
-    
     e.preventDefault(); 
-    if (isrecording == false) { // If it is not recording then I proceed to compile and modify css styles.
-        recognition.start(); 
-        buttonrecordingelement.innerHTML = "Stop Recording";
+    if (isrecording == false) { // Si no se está grabando, comienza la grabación
+        // Verificar permisos del micrófono
+        navigator.mediaDevices.getUserMedia({ audio: true })
+            .then(function(stream) {
+                // Permiso otorgado, iniciar reconocimiento de voz
+                recognition.start(); 
+                buttonrecordingelement.innerHTML = "Stop Recording";
 
-        iconmicrophone.classList.remove("fill-gray-400")
-        iconmicrophone.classList.add("fill-red-500")
+                iconmicrophone.classList.remove("fill-gray-400")
+                iconmicrophone.classList.add("fill-red-500")
 
-        buttonrecordingelement.classList.add("hover:bg-red-500")
-        buttonrecordingelement.classList.remove("hover:bg-blue-500")
-        isrecording = true
-    } else if (isrecording == true) { // Stop recording and remodify values
+                buttonrecordingelement.classList.add("hover:bg-red-500")
+                buttonrecordingelement.classList.remove("hover:bg-blue-500")
+                isrecording = true;
+            })
+            .catch(function(err) {
+                // Permiso denegado o error
+                console.error('Error al acceder al micrófono:', err);
+                // Mostrar alerta al usuario
+                alert('Cannot start recordings due to lack of microphone permissions.');
+            });
+    } else if (isrecording == true) { // Detener la grabación y revertir los cambios
         recognition.stop();
-        isrecording = false
+        isrecording = false;
         buttonrecordingelement.innerHTML = "Start Recording";
 
         iconmicrophone.classList.add("fill-gray-400")
@@ -39,8 +49,8 @@ buttonrecordingelement.addEventListener('click', function(e) {
         buttonrecordingelement.classList.remove("hover:bg-red-500")
         buttonrecordingelement.classList.add("hover:bg-blue-500")
     }
-   
 });
+
 
 recognition.addEventListener('result', function(e) { // Result of the audio compilation in which I send it to write and modify the values since the API itself can stop if it stops receiving audio (It can happen).
     const result = e.results[0][0].transcript; 
