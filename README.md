@@ -1,6 +1,6 @@
 # Speech to Text - Voice Typing & Translation
 
-It is a small project made for astro learning in which you have to compile what you are saying and translate it into the language you want.
+It's a little astro project that records what you're saying and translates it into the language of your choice.
 
 ## Technologies used
 
