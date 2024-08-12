@@ -17,11 +17,11 @@ recognition.maxAlternatives = 1;
 
 buttonrecordingelement.addEventListener('click', function(e) {
     e.preventDefault(); 
-    if (isrecording == false) { // Si no se está grabando, comienza la grabación
-        // Verificar permisos del micrófono
+    if (isrecording == false) { // If not is recording, start
+        //  Verify perms microphone 
         navigator.mediaDevices.getUserMedia({ audio: true })
             .then(function(stream) {
-                // Permiso otorgado, iniciar reconocimiento de voz
+                // Perms otorgated and start recording voice
                 recognition.start(); 
                 buttonrecordingelement.innerHTML = "Stop Recording";
 
@@ -33,12 +33,12 @@ buttonrecordingelement.addEventListener('click', function(e) {
                 isrecording = true;
             })
             .catch(function(err) {
-                // Permiso denegado o error
+                // Permission Deny 
                 console.error('Error al acceder al micrófono:', err);
-                // Mostrar alerta al usuario
+                // Show alert to the user Mostrar alerta al usuario
                 alert('Cannot start recordings due to lack of microphone permissions.');
             });
-    } else if (isrecording == true) { // Detener la grabación y revertir los cambios
+    } else if (isrecording == true) { // Stop recording and revert changes 
         recognition.stop();
         isrecording = false;
         buttonrecordingelement.innerHTML = "Start Recording";

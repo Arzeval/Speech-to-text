@@ -13,3 +13,5 @@ It is a small project made for astro learning in which you have to compile what 
 ## Demo
 
 [Here](https://speech-to-text-voice.vercel.app/)
+
+[PageSpeed](https://pagespeed.web.dev/analysis/https-speech-to-text-voice-vercel-app/vyworsmq7g?form_factor=desktop)
